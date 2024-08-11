@@ -19,19 +19,19 @@ const Login = () => {
           <h2 className="form-title">Sign In</h2>
           <form method="POST" className="register-form" id="login-form">
             <div className="form-group">
-              <label for="your_name">
-                <i className="zmdi zmdi-account material-icons-name"></i>
+              <label for="your_email">
+                <i className="zmdi zmdi-email material-icons-name"></i>
               </label>
               <input
                 type="text"
-                name="your_name"
-                id="your_name"
-                placeholder="Your Name"
+                name="your_email"
+                id="your_email"
+                placeholder="Your Email"
               />
             </div>
             <div className="form-group">
               <label for="your_pass">
-                <i className="zmdi zmdi-lock"></i>
+                <i className="zmdi zmdi-lock material-icons-name"></i>
               </label>
               <input
                 type="password"

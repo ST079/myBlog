@@ -22,7 +22,7 @@ const Register = () => {
             </div>
             <div className="form-group">
               <label for="email">
-                <i className="zmdi zmdi-email"></i>
+                <i className="zmdi zmdi-email material-icons-name"></i>
               </label>
               <input
                 type="email"
@@ -33,7 +33,7 @@ const Register = () => {
             </div>
             <div className="form-group">
               <label for="pass">
-                <i className="zmdi zmdi-lock"></i>
+                <i className="zmdi zmdi-lock material-icons-name"></i>
               </label>
               <input
                 type="password"
@@ -44,7 +44,7 @@ const Register = () => {
             </div>
             <div className="form-group">
               <label for="re-pass">
-                <i className="zmdi zmdi-lock-outline"></i>
+                <i className="zmdi zmdi-lock-outline material-icons-name"></i>
               </label>
               <input
                 type="password"
