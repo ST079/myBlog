@@ -1,9 +1,39 @@
-import { Link } from "react-router-dom";
+import { useCallback, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 import "./LoginSignup.css";
 import SignInImg from "../assets/signIn.png";
+import { login } from "../services/users";
+import Notify from "../components/Notify";
+import { setToken } from "../utils/token";
 
 const Login = () => {
+  const navigate = useNavigate("");
+  //login mechanism
+  const [payload, setPayload] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [error, setError] = useState("");
+
+  const handelLogin = async (e) => {
+    try {
+      e.preventDefault();
+      const { data } = await login(payload);
+      if (data?.data) {
+        setToken(data.data);
+        navigate("/");
+      }
+    } catch (error) {
+      setError(error);
+    } finally {
+      setTimeout(() => {
+        setError("");
+      }, 3000);
+    }
+  };
+
   return (
     <div className="container">
       <div className="signin-content">
@@ -17,27 +47,46 @@ const Login = () => {
         </div>
         <div className="signin-form">
           <h2 className="form-title">Sign In</h2>
-          <form method="POST" className="register-form" id="login-form">
+          {error && <Notify msg={error} />}
+          <form
+            method="POST"
+            className="register-form"
+            id="login-form"
+            onSubmit={(e) => handelLogin(e)}
+          >
             <div className="form-group">
-              <label for="your_email">
+              <label htmlFor="your_email">
                 <i className="zmdi zmdi-email material-icons-name"></i>
               </label>
               <input
-                type="text"
-                name="your_email"
+                type="email"
+                name="email"
                 id="your_email"
                 placeholder="Your Email"
+                required
+                onChange={(e) =>
+                  setPayload((prev) => {
+                    return { ...prev, email: e.target.value };
+                  })
+                }
               />
             </div>
+
             <div className="form-group">
-              <label for="your_pass">
+              <label htmlFor="your_pass">
                 <i className="zmdi zmdi-lock material-icons-name"></i>
               </label>
               <input
                 type="password"
-                name="your_pass"
+                name="password"
                 id="your_pass"
                 placeholder="Password"
+                required
+                onChange={(e) =>
+                  setPayload((prev) => {
+                    return { ...prev, password: e.target.value };
+                  })
+                }
               />
             </div>
 
@@ -54,7 +103,7 @@ const Login = () => {
                 id="remember-me"
                 className="agree-term"
               />
-              <label for="remember-me" className="label-agree-term">
+              <label htmlFor="remember-me" className="label-agree-term">
                 <span>
                   <span></span>
                 </span>
@@ -67,7 +116,7 @@ const Login = () => {
                 name="signin"
                 id="signin"
                 className="form-submit"
-                value="Log in"
+                value="Log-in"
               />
             </div>
           </form>
