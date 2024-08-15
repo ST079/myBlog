@@ -25,8 +25,8 @@ const Login = () => {
         setToken(data.data);
         navigate("/");
       }
-    } catch (error) {
-      setError(error);
+    } catch (err) {
+      setError(err.response.data.message);
     } finally {
       setTimeout(() => {
         setError("");
@@ -47,7 +47,7 @@ const Login = () => {
         </div>
         <div className="signin-form">
           <h2 className="form-title">Sign In</h2>
-          {error && <Notify msg={error} />}
+          {error && <Notify msg={error} />} 
           <form
             method="POST"
             className="register-form"

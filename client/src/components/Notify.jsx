@@ -1,6 +1,6 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
-const Notify = ( variant = "danger", msg ) => {
+const Notify = ({ variant = "danger", msg }) => {
   return (
     <>
       <Alert
