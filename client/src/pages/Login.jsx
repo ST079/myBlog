@@ -1,11 +1,11 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 import "./LoginSignup.css";
 import SignInImg from "../assets/signIn.png";
 import { login } from "../services/users";
 import Notify from "../components/Notify";
-import { setToken } from "../utils/token";
+import { setToken, getToken } from "../utils/token";
 
 const Login = () => {
   const navigate = useNavigate("");
@@ -34,6 +34,13 @@ const Login = () => {
     }
   };
 
+  useEffect(() => {
+    const token = getToken();
+    if (token) {
+      navigate("/");
+    }
+  }, [navigate]);
+
   return (
     <div className="container">
       <div className="signin-content">
@@ -47,7 +54,7 @@ const Login = () => {
         </div>
         <div className="signin-form">
           <h2 className="form-title">Sign In</h2>
-          {error && <Notify msg={error} />} 
+          {error && <Notify msg={error} />}
           <form
             method="POST"
             className="register-form"

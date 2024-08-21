@@ -10,7 +10,7 @@ const Home = () => {
           <div className="container-fluid">
             <a className="navbar-brand fw-bold" href="#">
               <img
-                src="../public/favicon.png"
+                src="../favicon.png"
                 alt="Logo"
                 width="30"
                 height="30"
@@ -137,7 +137,7 @@ const Home = () => {
             <div className="carousel-inner">
               <div className="carousel-item active">
                 <img
-                  src="/public/images/carousel/image.png"
+                  src="/images/carousel/image.png"
                   className="d-block w-100"
                   alt="..."
                   style={{ height: 400 }}
@@ -151,7 +151,7 @@ const Home = () => {
               </div>
               <div className="carousel-item">
                 <img
-                  src="/public/images/carousel/2.jpg"
+                  src="/images/carousel/2.jpg"
                   className="d-block w-100"
                   style={{ height: 400 }}
                   alt="..."
@@ -165,7 +165,7 @@ const Home = () => {
               </div>
               <div className="carousel-item">
                 <img
-                  src="/public/images/carousel/3.jpg"
+                  src="/images/carousel/3.jpg"
                   className="d-block w-100"
                   style={{ height: 400 }}
                   alt="..."
@@ -267,7 +267,7 @@ const Home = () => {
 
               <div className="card mb-3 me-3">
                 <img
-                  src="/public/images/cards/c5.png"
+                  src="/images/cards/c5.png"
                   className="card-img-top"
                   alt="..."
                 />
