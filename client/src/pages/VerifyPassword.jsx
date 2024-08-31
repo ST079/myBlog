@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import VerifyPass from "../assets/verifyPassword.png";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import "./LoginSignup.css";
+import Notify from "../components/Notify";
+import { verifyFpToken } from "../services/users";
 
 const VerifyPassword = () => {
   const navigate = useNavigate();
@@ -12,17 +13,35 @@ const VerifyPassword = () => {
     newPassword: "",
   });
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+
   const back = () => {
     navigate("/forgot-password");
   };
 
-  const handelSubmit = async (e) => {
+  const handelChangePassword = async (e) => {
     try {
-      e.prevenDefault();
+      e.preventDefault();
+      const { data } = await verifyFpToken(payload);
+      if (data) {
+        setMessage(data?.data);
+        setTimeout(() => {
+          navigate("/login");
+        }, 3000);
+      }
     } catch (err) {
-      console.log(err);
+      const error = err?.response?.data?.message;
+      setError(error);
     } finally {
-      console.log(e);
+      setTimeout(() => {
+        setMessage("");
+        setError("");
+        setPayload({
+          email: state?.email,
+          token: "",
+          newPassword: "",
+        });
+      }, 3000);
     }
   };
 
@@ -43,12 +62,12 @@ const VerifyPassword = () => {
         </div>
         <div className="signin-form">
           <h2 className="form-title">Verify Your Token !* </h2>
-
+          {message && <Notify variant="success" msg={message} color="green" />}
+          {error && <Notify msg={error} />}
           <form
             method="POST"
             className="register-form"
-            id="login-form"
-            onSubmit={(e) => handelSubmit(e)}
+            onSubmit={(e) => handelChangePassword(e)}
           >
             <div className="form-group">
               <label htmlFor="your_email">
@@ -68,29 +87,29 @@ const VerifyPassword = () => {
                 <i className="zmdi zmdi-wrench material-icons-name"></i>
               </label>
               <input
-                type="number"
+                type="text"
                 name="token"
                 id="token"
                 placeholder="Your Token"
-                required
                 maxLength={6}
                 onChange={(e) => {
                   setPayload((prev) => {
                     return { ...prev, token: e.target.value };
                   });
                 }}
+                required
               />
             </div>
             <div className="form-text">Enter your six digit token.</div>
 
             <div className="form-group">
-              <label htmlFor="your_pass">
+              <label htmlFor="newPassword">
                 <i className="zmdi zmdi-key material-icons-name"></i>
               </label>
               <input
                 type="text"
-                name="password"
-                id="your_pass"
+                name="newPssword"
+                id="newPassword"
                 placeholder=" New Password"
                 onChange={(e) => {
                   setPayload((prev) => {
@@ -100,16 +119,14 @@ const VerifyPassword = () => {
                 required
               />
             </div>
-
             <div className="form-group form-button">
               <input
                 type="submit"
-                name="next"
-                id="next"
                 className="form-submit"
                 value="Change Password"
               />
             </div>
+
             <div
               className=" d-flex"
               style={{ cursor: "pointer" }}

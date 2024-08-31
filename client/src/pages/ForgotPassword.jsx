@@ -22,7 +22,7 @@ const ForgotPassword = () => {
       if (data) {
         setMessage(data?.data);
         setTimeout(() => {
-          navigate("/verify-password",{state:{email}});
+          navigate("/verify-password", { state: { email } });
         }, 2000);
       }
     } catch (err) {
@@ -52,7 +52,6 @@ const ForgotPassword = () => {
           <form
             method="POST"
             className="register-form"
-            id="login-form"
             onSubmit={(e) => handelNext(e)}
           >
             <div className="form-group">

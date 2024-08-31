@@ -160,15 +160,15 @@ const generateFpToken = async (payload) => {
 };
 
 const verifyFpToken = async (payload) => {
-  const { token, password, email } = payload;
-  if (!token || !password || !email) throw new Error("Something went wrong!!");
+  const { token, newPassword, email } = payload;
+  if (!token || !newPassword || !email) throw new Error("Something went wrong!!");
   const user = await userModel.findOne({ email });
   if (!user) throw new Error("User not found!");
   const { token: verifyToken } = user;
   if (token != verifyToken) throw new Error("Token mismatched");
   await userModel.updateOne(
     { email },
-    { password: hashPassword(password) },
+    { password: hashPassword(newPassword) },
     { token: "" }
   );
   return "Password Updated Successfully";
