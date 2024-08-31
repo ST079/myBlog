@@ -9,13 +9,12 @@ const register = async (payload) => {
   payload.password = hashPassword(payload.password);
   const user = await userModel.create(payload);
   if (!user) throw new Error("Registeration Failed");
-  // const result = await mailer(
-  //   user.email,
-  //   "User SignUp",
-  //   "User SignUp sucessfull :)"
-  // );
-  // if (result) 
-  return "Regestration Completed";
+  const result = await mailer(
+    user.email,
+    "User SignUp",
+    "User SignUp sucessfull :)"
+  );
+  if (result) return "Regestration Completed";
 };
 
 const login = async (payload) => {
@@ -141,21 +140,23 @@ const blockUser = (_id) => {
 };
 
 //forgot password
-const fpToken = async (payload) => {
+const generateFpToken = async (payload) => {
   const { email } = payload;
   if (!email) throw new Error("Email is Required!!!");
   const user = await userModel.findOne({ email });
   if (!user) throw new Error("User doesn't exist");
   //generate token
-  const randomToken = generateRandomToken();
+  const token = generateRandomToken();
   //store token in db
-  await userModel.updateOne({ email }, { token: randomToken });
-  const isEmailSent = await mailer(
-    user.email,
-    "Forget Password",
-    `Your token is ${randomToken}`
-  );
-  if (isEmailSent) return "Forgot Password token sent successfully";
+  await userModel.updateOne({ email }, { token: token });
+  console.log(token);
+  // const isEmailSent = await mailer(
+  //   user.email,
+  //   "Forget Password",
+  //   `Your token is ${randomToken}`
+  // );
+  // if (isEmailSent) 
+  return "Forgot Password token sent successfully";
 };
 
 const verifyFpToken = async (payload) => {
@@ -207,7 +208,7 @@ module.exports = {
   updateProfile,
   getById,
   updateById,
-  fpToken,
+  generateFpToken,
   verifyFpToken,
   resetPassword,
   changePassword,

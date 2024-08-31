@@ -55,7 +55,7 @@ router.post("/login", async (req, res, next) => {
 
 router.post("/generate-fp-token", async (req, res, next) => {
   try {
-    const result = await userController.fpToken(req.body);
+    const result = await userController.generateFpToken(req.body);
     res.json({ data: result });
   } catch (error) {
     next(error);

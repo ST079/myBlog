@@ -1,14 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import VerifyPass from "../assets/verifyPassword.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import "./LoginSignup.css";
 
 const VerifyPassword = () => {
   const navigate = useNavigate();
+  const { state } = useLocation();
+  const [payload, setPayload] = useState({
+    email: state?.email,
+    token: "",
+    newPassword: "",
+  });
   const [error, setError] = useState("");
   const back = () => {
     navigate("/forgot-password");
   };
+
+  const handelSubmit = async (e) => {
+    try {
+      e.prevenDefault();
+    } catch (err) {
+      console.log(err);
+    } finally {
+      console.log(e);
+    }
+  };
+
+  //prevent the direct ascess
+  useEffect(() => {
+    if (!state) {
+      navigate("/login");
+    }
+  }, [state, navigate]);
 
   return (
     <div className="container d-flex vh-100 align-items-center">
@@ -21,7 +44,12 @@ const VerifyPassword = () => {
         <div className="signin-form">
           <h2 className="form-title">Verify Your Token !* </h2>
 
-          <form method="POST" className="register-form" id="login-form">
+          <form
+            method="POST"
+            className="register-form"
+            id="login-form"
+            onSubmit={(e) => handelSubmit(e)}
+          >
             <div className="form-group">
               <label htmlFor="your_email">
                 <i className="zmdi zmdi-email material-icons-name"></i>
@@ -30,7 +58,7 @@ const VerifyPassword = () => {
                 type="email"
                 name="email"
                 id="your_email"
-                placeholder="*********@gmail.com"
+                value={state?.email}
                 disabled
               />
             </div>
@@ -46,6 +74,11 @@ const VerifyPassword = () => {
                 placeholder="Your Token"
                 required
                 maxLength={6}
+                onChange={(e) => {
+                  setPayload((prev) => {
+                    return { ...prev, token: e.target.value };
+                  });
+                }}
               />
             </div>
             <div className="form-text">Enter your six digit token.</div>
@@ -59,6 +92,11 @@ const VerifyPassword = () => {
                 name="password"
                 id="your_pass"
                 placeholder=" New Password"
+                onChange={(e) => {
+                  setPayload((prev) => {
+                    return { ...prev, newPassword: e.target.value };
+                  });
+                }}
                 required
               />
             </div>

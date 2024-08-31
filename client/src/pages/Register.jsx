@@ -74,12 +74,7 @@ const Register = () => {
                 required
               />
             </div>
-            {/* <div className="form-group">
-              <label htmlFor="profilePic">
-                <i className="zmdi zmdi-folder material-icons-name"></i>
-              </label>
-              <input type="file" name="profilePic" id="profilePic" />
-            </div> */}
+            
             <div className="form-group">
               <label htmlFor="pass">
                 <i className="zmdi zmdi-lock material-icons-name"></i>

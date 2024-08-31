@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import ForgotPass from "../assets/forgotPassword.png";
 import { Link, useNavigate } from "react-router-dom";
 import "./LoginSignup.css";
+import Notify from "../components/Notify";
+import { generateFpToken } from "../services/users";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
-  
+  const [message, setMessage] = useState("");
+
   const back = () => {
     navigate("/login");
   };
@@ -15,8 +18,21 @@ const ForgotPassword = () => {
   const handelNext = async (e) => {
     try {
       e.preventDefault();
+      const { data } = await generateFpToken({ email });
+      if (data) {
+        setMessage(data?.data);
+        setTimeout(() => {
+          navigate("/verify-password",{state:{email}});
+        }, 2000);
+      }
     } catch (err) {
-      setError(err.response.data.message);
+      const error = err?.response?.data?.message;
+      setError(error);
+    } finally {
+      setTimeout(() => {
+        setMessage("");
+        setError("");
+      }, 3000);
     }
   };
 
@@ -30,6 +46,8 @@ const ForgotPassword = () => {
         </div>
         <div className="signin-form">
           <h2 className="form-title">Forgot Password ? </h2>
+          {message && <Notify variant="success" msg={message} color="green" />}
+          {error && <Notify msg={error} />}
 
           <form
             method="POST"
@@ -55,15 +73,13 @@ const ForgotPassword = () => {
             </div>
 
             <div className="form-group form-button">
-              <Link to="/verify-password">
-                <input
-                  type="submit"
-                  name="next"
-                  id="next"
-                  className="form-submit"
-                  value="Next"
-                />
-              </Link>
+              <input
+                type="submit"
+                name="next"
+                id="next"
+                className="form-submit"
+                value="Next"
+              />
             </div>
 
             <div
