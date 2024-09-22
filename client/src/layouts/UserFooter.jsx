@@ -1,5 +1,6 @@
 import React from 'react'
 import FooterImg from "../../public/favicon.png"
+import { Link } from 'react-router-dom'
 
 const UserFooter = () => {
   return (
@@ -13,11 +14,13 @@ const UserFooter = () => {
       </div>
   
       <ul className="nav col-md-4 justify-content-end list-unstyled d-flex">
-        <li className="ms-3"><a className="text-body-secondary" href="#"><i className="zmdi zmdi-instagram material-icons-name" height="24" width="24"></i></a></li>
-        <li className="ms-3"><a className="text-body-secondary" href="#">
-        <i className="zmdi zmdi-linkedin-box material-icons-name" height="24" width="24"></i></a></li>
-        <li className="ms-3"><a className="text-body-secondary" href="#"><i className="zmdi zmdi-facebook-box material-icons-name" height="24" width="24"></i></a></li>
-        <li className="ms-3"><a className="text-body-secondary" href="#"><i className="zmdi zmdi-github-box material-icons-name" height="24" width="24"></i></a></li>
+        <li className="ms-3"><Link className="text-body-secondary" to="www.instagram.com" target='_blank'><i className="zmdi zmdi-instagram material-icons-name" height="24" width="24"></i></Link></li>
+
+        <li className="ms-3"><Link className="text-body-secondary" to="#" target='_blank'><i className="zmdi zmdi-linkedin-box material-icons-name" height="24" width="24"></i></Link></li>
+
+        <li className="ms-3"><Link className="text-body-secondary" to="#" target='_blank'><i className="zmdi zmdi-facebook-box material-icons-name" height="24" width="24"></i></Link></li>
+        
+        <li className="ms-3"><Link className="text-body-secondary" to="#" target='_blank'><i className="zmdi zmdi-github-box material-icons-name" height="24" width="24"></i></Link></li>
       </ul>
     </footer>
     </div>

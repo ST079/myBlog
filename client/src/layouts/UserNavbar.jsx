@@ -1,12 +1,13 @@
 import React from "react";
 import "./UserNavbar.css";
+import { Link } from "react-router-dom";
 
 const UserNavbar = () => {
   return (
       <div>
         <nav className="navbar border-bottom">
           <div className="container-fluid">
-            <a className="navbar-brand fw-bold" href="#">
+            <Link className="navbar-brand fw-bold" href="#">
               <img
                 src="/favicon.png"
                 alt="Logo"
@@ -15,7 +16,7 @@ const UserNavbar = () => {
                 className="d-inline-block align-text-top me-3"
               />
               iKoders
-            </a>
+            </Link>
             {/* <!-- Search --> */}
             <nav className="navbar">
               <div className="container-fluid">
@@ -66,34 +67,34 @@ const UserNavbar = () => {
             >
               <ul className="navbar-nav">
                 <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="#">
+                  <Link className="nav-link active" aria-current="page" to="/">
                     Home
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <Link className="nav-link" to="/about">
                     About
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item dropdown">
-                  <a
+                  <Link
                     className="nav-link dropdown-toggle"
-                    href="#"
+                    to="#"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
                     Categories
-                  </a>
+                  </Link>
                   <ul className="dropdown-menu">
                     <li>
-                      <a className="dropdown-item" href="#">
+                      <Link className="dropdown-item" to="/blogs/food">
                         Food
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a className="dropdown-item" href="#">
+                      <Link className="dropdown-item" to="/blogs/lifestyle">
                         LifeStyle
-                      </a>
+                      </Link>
                     </li>
                     <li>
                       <a className="dropdown-item" href="#">
@@ -116,9 +117,9 @@ const UserNavbar = () => {
                   </ul>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <Link className="nav-link" to="/contact">
                     Contact
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

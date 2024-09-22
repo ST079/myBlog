@@ -7,6 +7,10 @@ import ForgotPassword from "./pages/ForgotPassword";
 import VerifyPassword from "./pages/VerifyPassword";
 import UserLayout from "./layouts/UserLayout";
 import AdminLayout from "./layouts/AdminLayout";
+import Contact from "./pages/Contact";
+import About from "./pages/About";
+import Blogs from "./pages/Blogs";
+import BlogDetails from "./pages/BlogDetails";
 
 
 const App = () => {
@@ -21,13 +25,17 @@ const App = () => {
         <Route path="/register" element={<Register />} />
 
         {/* User Routes */}
-        <Route element={<UserLayout/>}>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<UserLayout/>}>
+        <Route index element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/blogs" element={<Blogs />} />
+        <Route path="/blogs/:id" element={<BlogDetails />} />
         </Route>
 
         {/* Admin Routes */}
-        <Route element={<AdminLayout/>}>
-        <Route path="/" element={<Home />} />
+        <Route path="/admin" element={<AdminLayout/>}>
+        <Route path="blogs" element={<Home />} />
         </Route>
 
 

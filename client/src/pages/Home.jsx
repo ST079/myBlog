@@ -71,10 +71,10 @@ const Home = () => {
       <div className="blog-container mt-4">
         <h2>Latest Posts</h2>
         <div className="grid">
-          <div className="profile border">
-            userprofile
+          <div className="border">
+            Blogs
           </div>
-          <div className="blogs border">latest blogs</div>
+          <div className="border">user</div>
         </div>
       </div>
     </div>
