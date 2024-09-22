@@ -1,19 +1,15 @@
-import React from 'react'
-import UserNavbar from "./UserNavbar"
-import UserFooter from "./UserFooter"
+import React from "react";
+import {Outlet} from 'react-router-dom';
+import UserNavbar from "./UserNavbar";
+import UserFooter from "./UserFooter";
 const UserLayout = () => {
   return (
     <div>
-      <UserNavbar/>
-    
-    
-    
-    
-    
-    
-      <UserFooter/>
+      <UserNavbar />
+      <Outlet/>
+      <UserFooter />
     </div>
-  )
-}
+  );
+};
 
-export default UserLayout
+export default UserLayout;
