@@ -3,6 +3,18 @@ const blogController = require("./blog-controller");
 const { checkRole } = require("../../utils/session-manager");
 const { blogValidate } = require("./blog-validation");
 
+
+
+router.get("/all-blogs", async (req, res, next) => {
+  try {
+    const result = await blogController.getAllBlogs();
+    res.json({ msg: result });
+  } catch (error) {
+    next(error);
+  }
+});
+
+
 router.get(
   "/published-only",
   checkRole(["admin", "user"]),

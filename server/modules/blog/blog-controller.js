@@ -87,4 +87,27 @@ const getPublishedBlogsOnly = async (search, page = 1, limit = 4) => {
   };
 };
 
-module.exports = { create, getPublishedBlogsOnly };
+const getAllBlogs=()=>{
+  return blogModel.aggregate([
+    {
+      $lookup: {
+        from: 'users', 
+        localField: 'author', 
+        foreignField: '_id', 
+        as: 'author'
+      }
+    }, {
+      $unwind: {
+        path: '$author', 
+        preserveNullAndEmptyArrays: false
+      }
+    }, {
+      $project: {
+        title: 1, 
+        author: '$author.name', 
+        pages: 1
+      }
+    }
+  ])
+}
+module.exports = { create, getPublishedBlogsOnly ,getAllBlogs};

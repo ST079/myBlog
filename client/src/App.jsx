@@ -11,36 +11,34 @@ import Contact from "./pages/Contact";
 import About from "./pages/About";
 import Blogs from "./pages/Blogs";
 import BlogDetails from "./pages/BlogDetails";
-
+import BlogList from "./pages/admin/blogs/BlogList";
 
 const App = () => {
   return (
     <div className="container">
       <Routes>
         {/* Pages routing */}
-        
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/verify-password" element={<VerifyPassword />} />
         <Route path="/register" element={<Register />} />
 
         {/* User Routes */}
-        <Route path="/" element={<UserLayout/>}>
-        <Route index element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/blogs" element={<Blogs />} />
-        <Route path="/blogs/:id" element={<BlogDetails />} />
+        <Route path="/" element={<UserLayout />}>
+          <Route index element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/blogs/:id" element={<BlogDetails />} />
         </Route>
 
         {/* Admin Routes */}
-        <Route path="/admin" element={<AdminLayout/>}>
-        <Route path="blogs" element={<Home />} />
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="blogs" element={<BlogList />} />
         </Route>
 
-
-      {/* Error route handel */}
-      <Route path="*" element={<NotFound />} />
+        {/* Error route handel */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

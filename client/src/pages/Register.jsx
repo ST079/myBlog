@@ -88,35 +88,6 @@ const Register = () => {
               />
             </div>
 
-            {/* <div className="form-group">
-              <label htmlFor="re-pass">
-                <i className="zmdi zmdi-lock-outline material-icons-name"></i>
-              </label>
-              <input
-                type="password"
-                name="re_password"
-                id="re_pass"
-                placeholder="Repeat your password"
-                required
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="checkbox"
-                name="agree-term"
-                id="agree-term"
-                className="agree-term"
-              />
-              <label htmlFor="agree-term" className="label-agree-term">
-                <span>
-                  <span></span>
-                </span>
-                I agree all statements in
-                <a href="#" className="term-service">
-                  Terms of service
-                </a>
-              </label>
-            </div> */}
             <div className="form-group form-button">
               <input
                 type="submit"
