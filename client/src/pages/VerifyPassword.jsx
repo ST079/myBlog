@@ -7,6 +7,7 @@ import { verifyFpToken } from "../services/users";
 const VerifyPassword = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
+  console.log(state);
   const [payload, setPayload] = useState({
     email: state?.email,
     token: "",

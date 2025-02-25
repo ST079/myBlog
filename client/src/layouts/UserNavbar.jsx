@@ -7,7 +7,7 @@ const UserNavbar = () => {
       <div>
         <nav className="navbar border-bottom">
           <div className="container-fluid">
-            <Link className="navbar-brand fw-bold" href="#">
+            <Link className="navbar-brand fw-bold" to="#">
               <img
                 src="/favicon.png"
                 alt="Logo"
@@ -31,6 +31,15 @@ const UserNavbar = () => {
                     Search
                   </button>
                 </form>
+                <Link to="/login"> 
+                    <i className="fa-duotone fa-solid fa-arrow-right-from-bracket mx-3 fs-5"></i>
+                </Link>
+                <Link>
+                <i className="fa-duotone fa-solid fa-bookmark cursor-pointer fs-5"></i>
+                </Link>
+                <Link>
+                <i className="fa-duotone fa-solid fa-bell cursor-pointer mx-3 fs-5"></i>
+                </Link>
               </div>
             </nav>
           </div>
@@ -97,12 +106,12 @@ const UserNavbar = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link className="dropdown-item" to="#">
+                      <Link className="dropdown-item" to="/blogs/technology">
                         Technology
                       </Link>
                     </li>
                     <li>
-                      <Link className="dropdown-item" to="#">
+                      <Link className="dropdown-item" to="/blogs/sports">
                         Sports
                       </Link>
                     </li>
@@ -110,7 +119,7 @@ const UserNavbar = () => {
                       <hr className="dropdown-divider" />
                     </li>
                     <li>
-                      <Link className="dropdown-item" to="#">
+                      <Link className="dropdown-item" to="/writeforus">
                         Write About Us
                       </Link>
                     </li>

@@ -23,3 +23,8 @@
 .line{
   border: 1px solid;
 }
+
+.fa-duotone{
+    cursor: pointer !important;
+    color: black;
+}
