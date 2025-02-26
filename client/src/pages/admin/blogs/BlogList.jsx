@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Table from "../../../components/Table";
 
 const BlogList = () => {
   const [data, setData] = useState([]);
@@ -21,9 +20,8 @@ const BlogList = () => {
     <>
       <div className="container p-3">
         <div className="heads d-flex justify-content-between">
-          <h2>Blogs</h2>
-          <button className="btn btn-success fw-bold btn-sm" style={{}}>
-            {" "}
+          <h2>Blog Lists</h2>
+          <button className="btn btn-success fw-bold btn-sm">
             + New Blog
           </button>
         </div>
@@ -34,11 +32,29 @@ const BlogList = () => {
               <th>#</th>
               <th>Title</th>
               <th>Author</th>
+              <th>Pages</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody></tbody>
+          <tbody>
+            {data.map((blog, index) => {
+              return (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{blog.title}</td>
+                  <td>{blog.author}</td>
+                  <td>{blog.pages}</td>
+                  <td>{blog.status}</td>
+                  <td>
+                    <button className="btn btn-primary btn-sm mx-2">Edit</button>
+                    <button className="btn btn-danger btn-sm">Delete</button>
+                  </td>
+                </tr>
+              );
+            }
+            )}
+          </tbody>
         </table>
         <div className="pageNumber d-flex align-items-center justify-content-center pt-5">
         <nav aria-label="Page navigation example">

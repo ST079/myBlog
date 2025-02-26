@@ -1,8 +1,18 @@
-import React from 'react'
+import {React, useEffect} from 'react'
 import AdminNavbar from "./AdminNavbar"
-import { Outlet } from 'react-router-dom'
+import { Outlet,useNavigate} from 'react-router-dom'
 import "./AdminLayout.css"
+import { getToken } from '../utils/token'
+import "../components/Table.css"
 const AdminLayout = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const token = getToken();
+    if (!token) {
+      navigate('/login');
+    }
+  }, [navigate]);
+
   return (
     <main className='d-flex vh-100'>
       <AdminNavbar/>

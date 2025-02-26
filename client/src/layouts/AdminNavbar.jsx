@@ -1,7 +1,15 @@
-import { Link,useLocation} from "react-router-dom";
+import { Link,useLocation,useNavigate} from "react-router-dom";
 import Logo from "../assets/logo.png";
+import { removeToken } from "../utils/token";
 const AdminNavbar = () => {
   const {pathname} = useLocation();
+  const navigate = useNavigate();
+
+  const logout = async() => {
+    removeToken();
+    navigate("/login");
+    
+  }
 
   return (
     <div>
@@ -49,11 +57,6 @@ const AdminNavbar = () => {
           <ul className="dropdown-menu dropdown-menu-dark text-small shadow">
             <li>
               <Link className="dropdown-item" to="#">
-                Settings
-              </Link>
-            </li>
-            <li>
-              <Link className="dropdown-item" to="#">
                 Profile
               </Link>
             </li>
@@ -61,9 +64,9 @@ const AdminNavbar = () => {
               <hr className="dropdown-divider" />
             </li>
             <li>
-              <Link className="dropdown-item" to="#">
+              <button className="dropdown-item" onClick={logout}>
                 Sign out
-              </Link>
+              </button>
             </li>
           </ul>
         </div>

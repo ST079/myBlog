@@ -105,6 +105,7 @@ const getAllBlogs=()=>{
       $project: {
         title: 1, 
         author: '$author.name', 
+        status:1,
         pages: 1
       }
     }
