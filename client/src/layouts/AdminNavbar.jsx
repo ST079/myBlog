@@ -1,32 +1,31 @@
-import { Link } from "react-router-dom";
+import { Link,useLocation} from "react-router-dom";
+import Logo from "../assets/logo.png";
 const AdminNavbar = () => {
+  const {pathname} = useLocation();
+
   return (
     <div>
-      <div className="d-flex flex-column flex-shrink-0 p-3 text-bg-dark vh-100">
+      <div className="d-flex flex-column flex-shrink-0 p-4 text-bg-dark vh-100">
         <Link
-          to="/"
+          to="/admin"
           className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
         >
-          <span className="fs-4">Admin Portal</span>
+          <img src={Logo} alt="" width="30" height="30" />
+          <span className="fs-4 mx-2">Admin Portal</span>
         </Link>
         <hr />
         <ul className="nav nav-pills flex-column mb-auto">
           <li>
-            <Link to="#" className="nav-link text-white active">
-              <i className="fa fa-dashboard me-2 "></i>
-              Dashboard
-            </Link>
-          </li>
-          <li>
-            <Link to="#" className="nav-link text-white">
-              <i className="fa fa-person me-2"></i>
-              Users
-            </Link>
-          </li>
-          <li>
-            <Link to="#" className="nav-link text-white ">
+            {/* uselocation ko pathname ma .includes garera parxa ki bhanera garda ni bhayo or full path match garera garda ni bhayo to dynamically switch the active status */}
+            <Link to="/admin/blogs" className={`nav-link text-white ${pathname.includes('blogs') ? 'active fw-bold fs-6' : ''}`}> 
               <i className="fa fa-book me-2 "></i>
               Blogs
+            </Link>
+          </li>
+          <li>
+            <Link to="/admin/users" className={`nav-link text-white ${pathname === '/admin/users' ? 'active fw-bold fs-6' : ''}`}>
+              <i className="fa fa-person me-2"></i>
+              Users
             </Link>
           </li>
         </ul>
@@ -39,7 +38,7 @@ const AdminNavbar = () => {
             aria-expanded="false"
           >
             <img
-              src="#"
+              src={Logo}
               alt=""
               className="rounded-circle me-2"
               width="32"
@@ -48,11 +47,6 @@ const AdminNavbar = () => {
             <strong>Admin</strong>
           </Link>
           <ul className="dropdown-menu dropdown-menu-dark text-small shadow">
-            <li>
-              <Link className="dropdown-item" to="#">
-                New project...
-              </Link>
-            </li>
             <li>
               <Link className="dropdown-item" to="#">
                 Settings

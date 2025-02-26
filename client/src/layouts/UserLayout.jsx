@@ -6,7 +6,7 @@ const UserLayout = () => {
   return (
     <div>
       <UserNavbar />
-      <main style={{height: "100vh"}}>
+      <main className="container p-3" style={{height: "100vh"}}>
       <Outlet/>
       </main>
       <UserFooter />

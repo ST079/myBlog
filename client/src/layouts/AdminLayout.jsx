@@ -4,11 +4,12 @@ import { Outlet } from 'react-router-dom'
 import "./AdminLayout.css"
 const AdminLayout = () => {
   return (
-    <div className='adminGrid'>
+    <main className='d-flex vh-100'>
       <AdminNavbar/>
+      <div className="col-md-9 mt-5 ">
       <Outlet/>
-
-    </div>
+      </div>
+    </main>
   )
 }
 

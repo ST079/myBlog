@@ -12,10 +12,11 @@ import About from "./pages/About";
 import Blogs from "./pages/Blogs";
 import BlogDetails from "./pages/BlogDetails";
 import BlogList from "./pages/admin/blogs/BlogList";
+import List from "./pages/admin/users/List";
 
 const App = () => {
   return (
-    <div className="container">
+    <div className="">
       <Routes>
         {/* Pages routing */}
         <Route path="/login" element={<Login />} />
@@ -34,7 +35,10 @@ const App = () => {
 
         {/* Admin Routes */}
         <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<BlogList />} />
           <Route path="blogs" element={<BlogList />} />
+          <Route path="users" element={<List />} />
+
         </Route>
 
         {/* Error route handel */}
