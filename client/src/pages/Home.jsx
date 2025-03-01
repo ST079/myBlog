@@ -76,16 +76,13 @@ const Home = () => {
       {/* blogs container  */}
       <div className="blog-container mt-4">
         <h2>Latest Posts</h2>
-<<<<<<< HEAD
         <div className="grid">
           <div className="border">
             Blogs
           </div>
           <div className="border">user</div>
         </div>
-=======
-     
->>>>>>> 5a3069d (blogs route modified)
+
       </div>
     </div>
   );

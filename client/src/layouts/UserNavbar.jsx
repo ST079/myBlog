@@ -92,14 +92,12 @@ const UserNavbar = () => {
                   About
                 </Link>
               </li>
-<<<<<<< HEAD
-=======
+
               <li className="nav-item">
                 <Link className="nav-link" to="/blogs">
                   Blogs
                 </Link>
               </li>
->>>>>>> 5a3069d (blogs route modified)
               <li className="nav-item dropdown">
                 <Link
                   className="nav-link dropdown-toggle"
