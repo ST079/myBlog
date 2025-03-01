@@ -13,7 +13,7 @@ const Home = () => {
         data-bs-ride="true"
       >
         <div className="carousel-inner">
-          <div className="carousel-item active" style={{ height: 300 }}>
+          <div className="carousel-item active" style={{ height: 400 }}>
             <img src={Img1} className="d-block w-100 h-100" alt="..." />
             <div className="carousel-caption d-none d-md-block">
               <h5>Your first blog posts won’t be perfect, but you just have to do it. </h5>
@@ -24,7 +24,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="carousel-item" style={{ height: 300 }}>
+          <div className="carousel-item" style={{ height: 400 }}>
             <img src={Img2} className="d-block w-100 h-100" alt="..." />
             <div className="carousel-caption d-none d-md-block">
               <h5>I’m always reinventing my blog for the better. </h5>
@@ -35,7 +35,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="carousel-item" style={{ height: 300 }}>
+          <div className="carousel-item" style={{ height: 400 }}>
             <img src={Img3} className="d-block w-100 h-100" alt="..." />
             <div className="carousel-caption d-none d-md-block">
               <h5>Read quality, all the time, every day. Then write.</h5>
@@ -76,12 +76,6 @@ const Home = () => {
       {/* blogs container  */}
       <div className="blog-container mt-4">
         <h2>Latest Posts</h2>
-        <div className="grid">
-          <div className="border">
-            Blogs
-          </div>
-          <div className="border">user</div>
-        </div>
 
       </div>
     </div>

@@ -14,7 +14,7 @@ const UserLayout = () => {
   return (
     <div>
       <UserNavbar />
-      <main className="container p-3" style={{height: "100vh"}}>
+      <main className="container p-3" style={{'minHeight': "100vh"}}>
       <Outlet/>
       </main>
       <UserFooter />
