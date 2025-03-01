@@ -1,4 +1,4 @@
-const userModel = require("./user-model");
+const userModel = require("./user.model");
 const { mailer } = require("../../services/mailer");
 const { hashPassword, comparePassword } = require("../../utils/bcrypt");
 const { signJwt, generateRandomToken } = require("../../utils/token");

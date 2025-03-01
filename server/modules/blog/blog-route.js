@@ -1,9 +1,7 @@
 const router = require("express").Router();
-const blogController = require("./blog-controller");
+const blogController = require("./blog.controller");
 const { checkRole } = require("../../utils/session-manager");
-const { blogValidate } = require("./blog-validation");
-
-
+const { blogValidate } = require("./blog.validation");
 
 router.get("/all-blogs", async (req, res, next) => {
   try {
@@ -14,16 +12,27 @@ router.get("/all-blogs", async (req, res, next) => {
   }
 });
 
+router.get("/my-blogs", checkRole(["user"]), async (req, res, next) => {
+  try {
+    const { page, limit } = req.query;
+    const result = await Controller.getAuthorBlogs(
+      req.currentUser,
+      page,
+      limit
+    );
+    res.json({ data: result });
+  } catch (e) {
+    next(e);
+  }
+});
 
 router.get(
   "/published-only",
-  checkRole(["admin", "user"]),
-  blogValidate,
   async (req, res, next) => {
     try {
       const { page, limit, title, author } = req.query;
       const search = { title, author };
-      const result = await blogController.getPublishedBlogsOnly(
+      const result = await blogController.getPublishedBlogs(
         search,
         page,
         limit

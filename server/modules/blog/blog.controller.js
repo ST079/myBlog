@@ -1,4 +1,4 @@
-const blogModel = require("./blog-model");
+const blogModel = require("./blog.model");
 const bookmarkModel = require("../bookmark/bookmark-model");
 const { slugGenerator } = require("../../utils/textPraser");
 //  CRUD
@@ -9,49 +9,54 @@ const create = (payload) => {
   return blogModel.create(payload);
 };
 
-const getPublishedBlogsOnly = async (search, page = 1, limit = 4) => {
+const getPublishedBlogs = async (search, page = 1, limit = 5) => {
   const query = [];
-  if (search?.author) {
-    query.push(
-      {
-        $lookup: {
-          from: "users",
-          localField: "author",
-          foreignField: "_id",
-          as: "author",
-        },
-      },
-      {
-        $unwind: {
-          path: "$author",
-          preserveNullAndEmptyArrays: false,
-        },
-      },
-      {
-        $addFields: {
-          author: "$author.name",
-        },
-      },
-      {
-        $match: {
-          author: new RegExp(search?.author, "gi"),
-        },
-      }
-    );
-  }
-
   if (search?.title) {
     query.push({
       $match: {
         title: new RegExp(search?.title, "gi"),
+        status: "published",
       },
     });
   }
-
+  // pagination
   query.push(
     {
+      $lookup: {
+        from: "users",
+        localField: "author",
+        foreignField: "_id",
+        as: "author",
+      },
+    },
+    {
+      $unwind: {
+        path: "$author",
+        preserveNullAndEmptyArrays: false,
+      },
+    },
+    {
+      $project: {
+        author: "$author.name",
+        title: 1,
+        slug: 1,
+        content: 1,
+        status: 1,
+        duration: 1,
+        createdAt: 1,
+        updatedAt: 1,
+        pictureUrl: 1,
+        _id: 0,
+      },
+    },
+    {
+      $match: {
+        status: "published",
+      },
+    },
+    {
       $facet: {
-        metaData: [
+        metadata: [
           {
             $count: "total",
           },
@@ -60,24 +65,33 @@ const getPublishedBlogsOnly = async (search, page = 1, limit = 4) => {
           {
             $skip: (+page - 1) * +limit,
           },
-          { $limit: +limit },
+          {
+            $limit: +limit,
+          },
         ],
       },
     },
     {
       $addFields: {
         total: {
-          $arrayElemAt: ["$metaData.total", 0],
+          $arrayElemAt: ["$metadata.total", 0],
         },
       },
     },
     {
       $project: {
-        metaData: 0,
+        metadata: 0,
       },
     }
   );
-  //search,sort and filter
+
+  if (search?.author) {
+    query.push({
+      $match: {
+        author: new RegExp(search?.author, "gi"),
+      },
+    });
+  }
   const result = await blogModel.aggregate(query);
   return {
     data: result[0].data,
@@ -111,4 +125,4 @@ const getAllBlogs=()=>{
     }
   ])
 }
-module.exports = { create, getPublishedBlogsOnly ,getAllBlogs};
+module.exports = { create, getPublishedBlogs ,getAllBlogs};

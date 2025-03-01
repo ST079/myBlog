@@ -22,5 +22,5 @@ mongoose.connect(process.env.DB).then(() => {
 
 app.use(errorMiddleware);
 app.listen(PORT, () => {
-  console.log("Blog Application is running");
+  console.log(`Blog Application is running at ${PORT}`);
 });

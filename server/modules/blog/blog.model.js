@@ -8,7 +8,7 @@ const blogModel = new Schema({
   author: { type: ObjectId, ref: "User", required: true },
   status: {
     type: String,
-    enum: ["Published", "Draft"],
+    enum: ["published", "Draft"],
     default: "Draft",
     required: true,
   },

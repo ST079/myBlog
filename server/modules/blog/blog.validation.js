@@ -5,7 +5,7 @@ const schema = Joi.object({
   content: Joi.string().min(50).required(),
   author: Joi.string(),
   status: Joi.string()
-    .valid(("Published", "Draft"))
+    .valid(("published", "Draft"))
     .default("Draft"),
 });
 

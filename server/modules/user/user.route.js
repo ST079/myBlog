@@ -1,9 +1,9 @@
 const multer = require("multer");
 const router = require("express").Router();
 
-const userController = require("./user-controller");
+const userController = require("./user.controller");
 const { checkRole } = require("../../utils/session-manager");
-const { registerValidate } = require("./user-validation");
+const { registerValidate } = require("./user.validation");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {

@@ -1,5 +1,5 @@
 const { verifyJwt } = require("./token");
-const userModel = require("../modules/user/user-model");
+const userModel = require("../modules/user/user.model");
 
 const checkRole = (sysRole) => {
   return async (req, res, next) => {
