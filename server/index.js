@@ -13,6 +13,13 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 app.use(morgan("dev"));
+app.use((req,res,next)=>{
+  setTimeout(()=>{
+    next();
+  },2000)
+})
+
+
 app.use(process.env.VERSION, indexRouter);
 
 //database connect
