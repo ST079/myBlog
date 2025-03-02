@@ -1,20 +1,20 @@
 const Joi = require("joi");
 
-const schema = Joi.object({
-  title: Joi.string().required(),
-  content: Joi.string().min(50).required(),
-  author: Joi.string(),
-  status: Joi.string()
-    .valid(("published", "Draft"))
-    .default("Draft"),
+const Schema = Joi.object({
+  title: Joi.string().min(10).required(),
+  slug: Joi.string(),
+  author: Joi.string().required(),
+  status: Joi.string().valid("draft", "published").default("draft"),
+  content: Joi.string().min(20).required(),
+  pictureUrl: Joi.string(),
+  duration: Joi.number(),
 });
 
-const blogValidate = (req, res, next) => {
-  const { error } = schema.validate(req.body);
-  if (error) {
-    return res.status(400).json({ msg: error.details[0].message });
-  }
+const validate = (req, res, next) => {
+  req.body.author = req.body.author || String(req.currentUser);
+  const { error } = Schema.validate(req.body);
+  if (error) next(error);
   next();
 };
 
-module.exports = { blogValidate };
+module.exports = { validate };

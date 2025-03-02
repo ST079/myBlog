@@ -4,6 +4,7 @@ import { useBlogContext } from "../contexts/BlogContext";
 import Logo from "../assets/logo.png";
 import "./Blogs.css";
 import { BlogLoader } from "../components/Loader";
+import { DateFotmatter } from "../utils/date";
 
 const Blogs = () => {
   const { blogs,loading,err,msg } = useBlogContext();
@@ -82,20 +83,18 @@ const Blogs = () => {
         </>}
         {blogs && blogs?.data.length > 0 && blogs.data.map(blog=>{
           return (
-            <div key={blogs?.slug} className="col">
-              <div className="card mb-3 border-0" style={{ maxWidth: "540" }}>
+            <div key={blogs?.slug} className="col-6">
+              <div className="card mb-3 border-0" style={{ maxWidth: "540"}}>
                 <div className="row g-0">
                   <div className="col-md-8">
                     <div className="card-body">
                       <div className="card-head d-flex justify-content-between align-items-center mb-2">
-                        <button className="custom cursor-pointer">Published</button>
-                        <p>26 Dec, 2025</p>
+                        <button className="custom cursor-pointer">{blog?.status}</button>
+                        <p>{DateFotmatter(blog?.createdAt)}</p>
                       </div>
-                      <h6 className="card-title">How to Be s Good Developer?</h6>
-                      <p className="card-text lh-sm" style={{ fontSize: "14px" }}>
-                        This is a wider card with supporting text below as a natural
-                        lead-in to additional content. This content is a little bit
-                        longer.
+                      <h6 className="card-title">{blog?.title.slice(0,20) + " ..."}</h6>
+                      <p className="card-text lh-sm" style={{ fontSize: "14px"}}>
+                        {blog?.content.slice(0, 100)+" ..."}
                       </p>
                       <div className="card-text d-flex justify-content-between align-items-center">
                         <div className="blog-btns">
@@ -108,14 +107,14 @@ const Blogs = () => {
                         </div>
 
                         <p className="text-body-secondary blog-details">
-                          <i className="fa-regular fa-id-card"></i> Sujan Tamang
+                          <i className="fa-regular fa-id-card"></i> {blog?.author}
                         </p>
                       </div>
                     </div>
                   </div>
                   <div className="col-md-4">
                     <img
-                      src={""}
+                      src={blog?.pictureUrl || ""}
                       className="img-fluid rounded-start default-img"
                       alt="..."
                       onError={(e) => {
