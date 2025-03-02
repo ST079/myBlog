@@ -56,6 +56,7 @@ const BlogList = () => {
             )}
           </tbody>
         </table>
+        {/* pagination */}
         <div className="pageNumber d-flex align-items-center justify-content-center pt-5">
         <nav aria-label="Page navigation example">
           <ul className="pagination">

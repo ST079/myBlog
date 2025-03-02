@@ -1,8 +1,9 @@
 import React from "react";
 import "./UserNavbar.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate ,useLocation} from "react-router-dom";
 
 const UserNavbar = () => {
+  const {pathname} = useLocation();
   const navigate = useNavigate();
   const logout = () => {
     // console.log("logout");
@@ -83,19 +84,24 @@ const UserNavbar = () => {
           >
             <ul className="navbar-nav">
               <li className="nav-item">
-                <Link className="nav-link active" aria-current="page" to="/">
+                <Link className={`nav-link ${pathname === "/" ? 'active fw-bold' : ''}`} aria-current="page" to="/">
                   Home
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/about">
+                <Link className={`nav-link ${pathname.includes('/about') ? 'active fw-bold' : ''}`} to="/about">
                   About
                 </Link>
               </li>
 
               <li className="nav-item">
-                <Link className="nav-link" to="/blogs">
+                <Link className={`nav-link ${pathname.includes('/blogs') ? 'active fw-bold' : ''}`} to="/blogs">
                   Blogs
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className={`nav-link ${pathname.includes('/contact') ? 'active fw-bold' : ''}`} to="/contact">
+                  Contact
                 </Link>
               </li>
               <li className="nav-item dropdown">
@@ -138,11 +144,7 @@ const UserNavbar = () => {
                   </li>
                 </ul>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/contact">
-                  Contact
-                </Link>
-              </li>
+            
             </ul>
           </div>
         </div>

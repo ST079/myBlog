@@ -2,16 +2,18 @@ import React, { useEffect } from "react";
 import useBlog from "../hooks/useBlog";
 import { useBlogContext } from "../contexts/BlogContext";
 import Logo from "../assets/logo.png";
-import "./Blogs.css"
+import "./Blogs.css";
+import { BlogLoader } from "../components/Loader";
 
 const Blogs = () => {
-  const { blogs } = useBlogContext();
+  const { blogs,loading,err,msg } = useBlogContext();
   const handelErrorImg = (e) => {
     e.target.src = Logo;
-  }
-  
+  };
+
   return (
     <div className="p-4">
+      {/* search */}
       <h2>Blogs</h2>
       <div className="search mb-4 d-flex justify-content-between">
         <input
@@ -54,245 +56,113 @@ const Blogs = () => {
           </ul>
         </div>
       </div>
-      <div className="count d-flex mb-4">
+      <div className="count d-flex mb-4 fw-bold ">
         <li className="list-unstyled pe-4">
-          <a href="#" className="text-decoration-none">
+          <a href="#" className="text-decoration-none text-secondary active">
             All
           </a>
         </li>
         <li className="list-unstyled pe-4">
-          <a href="#" className="text-decoration-none">
+          <a href="#" className="text-decoration-none text-secondary">
             Published
           </a>
         </li>
         <li className="list-unstyled pe-4">
-          <a href="#" className="text-decoration-none">
+          <a href="#" className="text-decoration-none text-secondary">
             Drafts
           </a>
         </li>
       </div>
 
-      {/* <!-- row 1 --> */}
+      {/* <!-- Blog Data --> */}
       <div className="row">
-        <div className="col">
-          <div className="card mb-3" style={{'maxWidth': '540'}}>
-            <div className="row g-0">
-              <div className="col-md-4">
-                <img src={""} className="img-fluid rounded-start default-img" alt="..." 
-                onError={(e)=>{handelErrorImg(e)}}/>
-              </div>
-              <div className="col-md-8">
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <div className="card-text">
-                    <p className="text-body-secondary ">
-                    <i className="fa-solid fa-calendar-days"></i> 2005/05/05
-                    </p>
-                    <p className="text-body-secondary ">
-                      <i className="fa-regular fa-id-card"></i> Sujan Tamang
-                    </p>
-                    <div className="blog-btns">
-                    
+        {loading && <>
+        <BlogLoader />
+        <BlogLoader />
+        </>}
+        {blogs && blogs?.data.length > 0 && blogs.data.map(blog=>{
+          return (
+            <div key={blogs?.slug} className="col">
+              <div className="card mb-3 border-0" style={{ maxWidth: "540" }}>
+                <div className="row g-0">
+                  <div className="col-md-8">
+                    <div className="card-body">
+                      <div className="card-head d-flex justify-content-between align-items-center mb-2">
+                        <button className="custom cursor-pointer">Published</button>
+                        <p>26 Dec, 2025</p>
+                      </div>
+                      <h6 className="card-title">How to Be s Good Developer?</h6>
+                      <p className="card-text lh-sm" style={{ fontSize: "14px" }}>
+                        This is a wider card with supporting text below as a natural
+                        lead-in to additional content. This content is a little bit
+                        longer.
+                      </p>
+                      <div className="card-text d-flex justify-content-between align-items-center">
+                        <div className="blog-btns">
+                          <button className="blog-btn btn">
+                            <i className="fa-solid fa-ellipsis fs-6"></i>
+                          </button>
+                          <button className="blog-btn btn">
+                            <i className="fa-duotone fa-solid fa-bookmark"></i>
+                          </button>
+                        </div>
+
+                        <p className="text-body-secondary blog-details">
+                          <i className="fa-regular fa-id-card"></i> Sujan Tamang
+                        </p>
+                      </div>
                     </div>
+                  </div>
+                  <div className="col-md-4">
+                    <img
+                      src={""}
+                      className="img-fluid rounded-start default-img"
+                      alt="..."
+                      onError={(e) => {
+                        handelErrorImg(e);
+                      }}
+                    />
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div className="col">
-          <div className="card mb-3" style={{'maxWidth': '540'}}>
-            <div className="row g-0">
-              <div className="col-md-4">
-                <img src={""} className="img-fluid rounded-start default-img" alt="..." 
-                onError={(e)=>{handelErrorImg(e)}}/>
-              </div>
-              <div className="col-md-8">
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <p className="card-text">
-                    <small className="text-body-secondary">
-                      Last updated 3 mins ago
-                    </small>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+
+          )
+        })}
       </div>
 
-      {/* <!-- row 2 --> */}
-      <div className="row">
-        <div className="col">
-          <div className="card mb-3" style={{'maxWidth': '540'}}>
-            <div className="row g-0">
-              <div className="col-md-4">
-                <img src={""} className="img-fluid rounded-start default-img" alt="..."
-                onError={(e)=>{handelErrorImg(e)}} />
-              </div>
-              <div className="col-md-8">
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <p className="card-text">
-                    <small className="text-body-secondary">
-                      Last updated 3 mins ago
-                    </small>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+      {/* pagination */}
+      <div className="pageNumber d-flex align-items-center justify-content-center pt-5">
+        <nav aria-label="Page navigation example">
+          <ul className="pagination">
+            <li className="page-item">
+              <a className="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li className="page-item">
+              <a className="page-link" href="#">
+                1
+              </a>
+            </li>
+            <li className="page-item">
+              <a className="page-link" href="#">
+                2
+              </a>
+            </li>
+            <li className="page-item">
+              <a className="page-link" href="#">
+                3
+              </a>
+            </li>
+            <li className="page-item">
+              <a className="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
         </div>
-        <div className="col">
-          <div className="card mb-3" style={{'maxWidth': '540'}}>
-            <div className="row g-0">
-              <div className="col-md-4">
-                <img src={""} className="img-fluid rounded-start default-img" alt="..." 
-                onError={(e)=>{handelErrorImg(e)}}/>
-              </div>
-              <div className="col-md-8">
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <p className="card-text">
-                    <small className="text-body-secondary">
-                      Last updated 3 mins ago
-                    </small>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* <!-- row 3 --> */}
-      <div className="row">
-        <div className="col">
-          <div className="card mb-3" style={{'maxWidth': '540'}}>
-            <div className="row g-0">
-              <div className="col-md-4">
-                <img src={""} className="img-fluid rounded-start default-img" alt="..." 
-                 onError={(e)=>{handelErrorImg(e)}}/>
-              </div>
-              <div className="col-md-8">
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <p className="card-text">
-                    <small className="text-body-secondary">
-                      Last updated 3 mins ago
-                    </small>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col">
-          <div className="card mb-3" style={{'maxWidth': '540'}}>
-            <div className="row g-0">
-              <div className="col-md-4">
-                <img src={""} className="img-fluid rounded-start default-img" alt="..." 
-                 onError={(e)=>{handelErrorImg(e)}} />
-              </div>
-              <div className="col-md-8">
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <p className="card-text">
-                    <small className="text-body-secondary">
-                      Last updated 3 mins ago
-                    </small>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* <!-- row 4 --> */}
-      <div className="row">
-        <div className="col">
-          <div className="card mb-3" style={{'maxWidth': '540'}}>
-            <div className="row g-0">
-              <div className="col-md-4">
-                <img src={""} className="img-fluid rounded-start default-img" alt="..." 
-                 onError={(e)=>{handelErrorImg(e)}}/>
-              </div>
-              <div className="col-md-8">
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <p className="card-text">
-                    <small className="text-body-secondary">
-                      Last updated 3 mins ago
-                    </small>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col">
-          <div className="card mb-3" style={{'maxWidth': '540'}}>
-            <div className="row g-0">
-              <div className="col-md-4">
-                <img src={""} className="img-fluid rounded-start default-img" alt="..." 
-                 onError={(e)=>{handelErrorImg(e)}}/>
-              </div>
-              <div className="col-md-8">
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">
-                    This is a wider card with supporting text below as a natural
-                    lead-in to additional content. This content is a little bit
-                    longer.
-                  </p>
-                  <p className="card-text">
-                    <small className="text-body-secondary">
-                      Last updated 3 mins ago
-                    </small>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

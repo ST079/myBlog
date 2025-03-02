@@ -12,6 +12,7 @@ const blogModel = new Schema({
     default: "Draft",
     required: true,
   },
+  pictureurl: String,
   pages: { type: Number, required: true },
   createdAt: { type: Date, default: Date.now() },
   updatedAt: { type: Date, default: Date.now() },
