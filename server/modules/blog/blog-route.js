@@ -46,7 +46,7 @@ router.post(
 router.get("/all-blogs", async (req, res, next) => {
   try {
     const result = await blogController.getAllBlogs();
-    res.json({ msg: result });
+    res.json({ data: result });
   } catch (error) {
     next(error);
   }

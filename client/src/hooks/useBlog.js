@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from 'react'
-import { PublishedBlogs } from '../services/blogs';
+import { PublishedBlogs , AllBlogs} from '../services/blogs';
 
 const useBlog = ({title, page, limit}) => {
     const [data, setData] = useState([]);
@@ -13,6 +13,8 @@ const useBlog = ({title, page, limit}) => {
             try {
                 setLoading(true);
                 const {data,msg} = await PublishedBlogs({title, page, limit});
+                // const {data,msg} = await AllBlogs();
+                // console.log(data);
                 setData(data);
                 setMsg(msg);
             } catch (error) {

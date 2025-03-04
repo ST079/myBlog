@@ -6,6 +6,9 @@ export const PublishedBlogs = ({title="",limit=8,page=1}) => {
   return instance.get(APIs.BLOGS + `/published-only?title=${title}&limit=${limit}&page=${page}`);
 };
 
+export const AllBlogs = ()=>{
+  return instance.get(APIs.BLOGS + "/all-blogs");
+}
 
 
 
