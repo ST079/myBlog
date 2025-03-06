@@ -35,7 +35,7 @@ router.post(
       if (req.file) {
         req.body.pictureUrl = req.file.path.replace("public", "");
       }
-      const result = await Controller.create(req.body);
+      const result = await blogController.create(req.body);
       res.json({ data: result });
     } catch (e) {
       next(e);
@@ -55,7 +55,7 @@ router.get("/all-blogs", async (req, res, next) => {
 router.get("/my-blogs", checkRole(["user"]), async (req, res, next) => {
   try {
     const { page, limit } = req.query;
-    const result = await Controller.getAuthorBlogs(
+    const result = await blogController.getAuthorBlogs(
       req.currentUser,
       page,
       limit
@@ -84,14 +84,14 @@ router.get(
   }
 );
 
-router.post("/", checkRole(["admin", "user"]), async (req, res, next) => {
-  try {
-    req.body.author = req.body.author || req.currentUser;
-    const result = await blogController.create(req.body);
-    res.json({ msg: result });
-  } catch (error) {
-    next(error);
-  }
-});
+// router.post("/", checkRole(["admin", "user"]), async (req, res, next) => {
+//   try {
+//     req.body.author = req.body.author || req.currentUser;
+//     const result = await blogController.create(req.body);
+//     res.json({ msg: result });
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 module.exports = router;

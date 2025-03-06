@@ -9,7 +9,7 @@ import UserLayout from "./layouts/UserLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
-import PublishedBlogs from "./pages/PublishedBlogs";
+import Blogs from "./pages/Blogs";
 import BlogDetails from "./pages/BlogDetails";
 import BlogList from "./pages/admin/blogs/BlogList";
 import List from "./pages/admin/users/List";
@@ -29,7 +29,7 @@ const App = () => {
         <Route path="/" element={<UserLayout />}>
           <Route index element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/blogs" element={<PublishedBlogs />} />
+          <Route path="/blogs" element={<Blogs />} />
           <Route path="/blogs/:id" element={<BlogDetails />} />
           <Route path="/contact" element={<Contact />} />
         </Route>

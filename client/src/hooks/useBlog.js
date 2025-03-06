@@ -13,8 +13,6 @@ const useBlog = ({title, page, limit}) => {
             try {
                 setLoading(true);
                 const {data,msg} = await PublishedBlogs({title, page, limit});
-                // const {data,msg} = await AllBlogs();
-                // console.log(data);
                 setData(data);
                 setMsg(msg);
             } catch (error) {
