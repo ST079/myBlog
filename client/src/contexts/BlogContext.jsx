@@ -3,9 +3,10 @@ import useBlog from "../hooks/useBlog";
 
 export const BlogContext = createContext(null);
 export const BlogContextProvider = ({ children }) => {
-  const { data, loading, error, msg } = useBlog({});
+  const [title, setTitle] = useState("");
+  const { data, loading, error, msg } = useBlog({ title });
   return (
-    <BlogContext.Provider value={{ blogs: data?.data, loading, error, msg }}>
+    <BlogContext.Provider value={{ blogs: data?.data, loading, error, msg ,setTitle}}>
       {children}
     </BlogContext.Provider>
   );

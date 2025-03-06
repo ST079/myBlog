@@ -1,27 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useBlogContext } from "../contexts/BlogContext";
 import Logo from "../assets/logo.png";
 import "./Blogs.css";
 import { BlogLoader } from "../components/Loader";
 import { DateFotmatter } from "../utils/date";
 import { Link } from "react-router-dom";
-import useBlog from "../hooks/useBlog";
+import { useDebounce } from "../hooks/useDebounce";
 
 const Blogs = () => {
   const [search, setSearch] = useState("");
+  // const [sortBy, setSortBy] = useState("date");
 
-  const { blogs, loading, err, msg } = useBlogContext();
+  const { blogs, loading, err, msg, setTitle } = useBlogContext();
   const handelErrorImg = (e) => {
     e.target.src = Logo;
   };
 
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
-  };
+  const { delayTerm } = useDebounce({ title: search });
 
-  const filteredBlogs = blogs?.data?.filter((blog) =>
-    blog.title.toLowerCase().includes(search.toLowerCase())
-  );
+  useEffect(() => {
+    setTitle(delayTerm);
+  }, [setTitle, delayTerm]);
+
+  // const handleSort = (criteria) => {
+  //   setSortBy(criteria);
+  // };
+  // // const filteredBlogs = blogs?.data?.filter((blog) =>
+  // //   blog.title.toLowerCase().includes(search.toLowerCase())
+  // // );
+
+  // const filteredBlogs = blogs?.data
+  // ?.filter((blog) =>
+  //   blog?.title.toLowerCase().includes(search.toLowerCase())
+  // )
+  // ?.sort((a, b) => {
+  //   if (sortBy === "name") {
+  //     return a.title.localeCompare(b.title); // Sort alphabetically
+  //   } else {
+  //     return new Date(b.createdAt) - new Date(a.createdAt); // Sort by date (latest first)
+  //   }
+  // });
 
   return (
     <div className="p-4">
@@ -34,7 +52,9 @@ const Blogs = () => {
           id="search"
           placeholder="Search Blogs"
           className="w-50"
-          onChange={handleSearch}
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
         />
         <div className="dropdown">
           <button
@@ -54,16 +74,6 @@ const Blogs = () => {
             <li>
               <a className="dropdown-item" href="#">
                 A-Z
-              </a>
-            </li>
-            <li>
-              <a className="dropdown-item" href="#">
-                Oldest
-              </a>
-            </li>
-            <li>
-              <a className="dropdown-item" href="#">
-                Popular
               </a>
             </li>
           </ul>
@@ -89,7 +99,7 @@ const Blogs = () => {
         )}
         {blogs &&
           blogs?.data.length > 0 &&
-          filteredBlogs.map((blog) => {
+          blogs.data.map((blog) => {
             return (
               <div key={blog?.slug} className="col-6">
                 <div
