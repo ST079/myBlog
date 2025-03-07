@@ -19,6 +19,29 @@ const getPublishedBlogs = async (search, page = 1, limit = 5) => {
       },
     });
   }
+
+  if (search?.sortBy) {
+    if (search?.sortBy === "alphabetical-z-a") {
+      query.push({
+        $sort: {
+          title: -1,
+        },
+      });
+    } else if (search?.sortBy === "latest") {
+      query.push({
+        $sort: {
+          createdAt: -1,
+        },
+      });
+    } else {
+      query.push({
+        $sort: {
+          title: 1,
+        },
+      });
+    }
+  }
+
   // pagination
   query.push(
     {
@@ -101,28 +124,30 @@ const getPublishedBlogs = async (search, page = 1, limit = 5) => {
   };
 };
 
-const getAllBlogs=()=>{
+const getAllBlogs = () => {
   return blogModel.aggregate([
     {
       $lookup: {
-        from: 'users', 
-        localField: 'author', 
-        foreignField: '_id', 
-        as: 'author'
-      }
-    }, {
+        from: "users",
+        localField: "author",
+        foreignField: "_id",
+        as: "author",
+      },
+    },
+    {
       $unwind: {
-        path: '$author', 
-        preserveNullAndEmptyArrays: false
-      }
-    }, {
+        path: "$author",
+        preserveNullAndEmptyArrays: false,
+      },
+    },
+    {
       $project: {
-        title: 1, 
-        author: '$author.name', 
-        status:1,
-        pages: 1
-      }
-    }
-  ])
-}
-module.exports = { create, getPublishedBlogs ,getAllBlogs};
+        title: 1,
+        author: "$author.name",
+        status: 1,
+        pages: 1,
+      },
+    },
+  ]);
+};
+module.exports = { create, getPublishedBlogs, getAllBlogs };

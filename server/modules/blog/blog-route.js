@@ -70,8 +70,8 @@ router.get(
   "/published-only",
   async (req, res, next) => {
     try {
-      const { page, limit, title, author } = req.query;
-      const search = { title, author };
+      const { page, limit, title, author,sortBy } = req.query;
+      const search = { title, author,sortBy };
       const result = await blogController.getPublishedBlogs(
         search,
         page,

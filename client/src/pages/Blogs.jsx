@@ -6,21 +6,45 @@ import { BlogLoader } from "../components/Loader";
 import { DateFotmatter } from "../utils/date";
 import { Link } from "react-router-dom";
 import { useDebounce } from "../hooks/useDebounce";
+import Pagination from "../components/Pagination";
 
 const Blogs = () => {
   const [search, setSearch] = useState("");
+  const [sortValue, setSortValue] = useState("");
   // const [sortBy, setSortBy] = useState("date");
 
-  const { blogs, loading, err, msg, setTitle } = useBlogContext();
+  const {
+    blogs,
+    loading,
+    err,
+    msg,
+    setTitle,
+    setSort,
+    limit,
+    page,
+    setLimit,
+    setPage,
+  } = useBlogContext();
   const handelErrorImg = (e) => {
     e.target.src = Logo;
   };
 
+  // console.log("limit value bog:", limit);
+
+
   const { delayTerm } = useDebounce({ title: search });
 
   useEffect(() => {
-    setTitle(delayTerm);
-  }, [setTitle, delayTerm]);
+    if (delayTerm) {
+      setTitle(delayTerm);
+      setSortValue("");
+      setSort("");
+    }
+    if (sortValue) {
+      setSort(sortValue);
+      setTitle("");
+    }
+  }, [setTitle, delayTerm, setSort, sortValue]);
 
   // const handleSort = (criteria) => {
   //   setSortBy(criteria);
@@ -56,28 +80,15 @@ const Blogs = () => {
             setSearch(e.target.value);
           }}
         />
-        <div className="dropdown">
-          <button
-            className="btn btn-secondary dropdown-toggle"
-            type="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Sort By
-          </button>
-          <ul className="dropdown-menu">
-            <li>
-              <a className="dropdown-item" href="#">
-                Latest
-              </a>
-            </li>
-            <li>
-              <a className="dropdown-item" href="#">
-                A-Z
-              </a>
-            </li>
-          </ul>
-        </div>
+        <select
+          className="form-select"
+          style={{ maxWidth: "200px" }}
+          onChange={(e) => setSortValue(e.target.value)}
+        >
+          <option value="latest">Latest</option>
+          <option value="alphabetical-a-z">A-Z</option>
+          <option value="alphabetical-z-a">Z-A</option>
+        </select>
       </div>
 
       <div className="count d-flex mb-4 fw-bold ">
@@ -101,7 +112,7 @@ const Blogs = () => {
           blogs?.data.length > 0 &&
           blogs.data.map((blog) => {
             return (
-              <div key={blog?.slug} className="col-6">
+              <div key={blog?.slug} className="col-md-6 col-sm-12">
                 <div
                   className="card mb-3 border-0"
                   style={{ maxWidth: "540px" }}
@@ -159,37 +170,13 @@ const Blogs = () => {
       </div>
 
       {/* pagination */}
-      <div className="pageNumber d-flex align-items-center justify-content-center pt-5">
-        <nav aria-label="Page navigation example">
-          <ul className="pagination">
-            <li className="page-item">
-              <a className="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="#">
-                1
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="#">
-                2
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="#">
-                3
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      <Pagination
+      data={blogs}
+        limit={limit}
+        page={page}
+        setLimit={setLimit}
+        setPage={setPage}
+      ></Pagination>
     </div>
   );
 };

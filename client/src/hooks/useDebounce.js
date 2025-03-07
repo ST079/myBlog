@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export const useDebounce = ({ title, delay = 1500 }) => {
+export const useDebounce = ({ title, delay = 1000 }) => {
   const [delayTerm, setDelayTerm] = useState("");
 
   useEffect(() => {

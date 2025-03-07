@@ -7,7 +7,7 @@ export const BlogLoader = () => {
     };
   return (
     <div className='row'>
-       <div className="col">
+       <div className="col-sm-8">
           <div className="card mb-3 border-0" style={{ maxWidth: "540" }}>
             <div className="row g-0">
               <div className="col-md-8">

@@ -28,17 +28,6 @@ const UserNavbar = () => {
           {/* <!-- Search --> */}
           <nav className="navbar">
             <div className="container-fluid">
-              <form className="d-flex" role="search">
-                <input
-                  className="form-control me-2"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                />
-                <button className="btn my-btn" type="submit">
-                  Search
-                </button>
-              </form>
               <button className="btn p-0" onClick={logout}>
                 <i className="fa-duotone fa-solid fa-arrow-right-from-bracket mx-3 fs-5"></i>
               </button>
