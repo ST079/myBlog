@@ -5,11 +5,40 @@ export const BlogContext = createContext(null);
 export const BlogContextProvider = ({ children }) => {
   const [title, setTitle] = useState("");
   const [sort, setSort] = useState("");
-  const [limit,setLimit] = useState(20);
-  const [page,setPage]= useState(1);
-  const { data, loading, error, msg } = useBlog({ title,sort,limit,page });
+
+  const {
+    data,
+    error,
+    loading,
+    msg,
+    limit,
+    currentPage,
+    total,
+    setCurrentPage,
+    setLimit,
+    setTotal,
+  } = useBlog({
+    title,
+    sort,
+  });
+
   return (
-    <BlogContext.Provider value={{ blogs: data?.data, loading, error, msg ,setTitle,setSort,setLimit,setPage,limit,page}}>
+    <BlogContext.Provider
+      value={{
+        blogs: data?.data,
+        loading,
+        error,
+        msg,
+        setTitle,
+        setSort,
+        currentPage,
+        setCurrentPage,
+        setLimit,
+        limit,
+        total,
+        setTotal,
+      }}
+    >
       {children}
     </BlogContext.Provider>
   );

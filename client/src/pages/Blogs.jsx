@@ -7,6 +7,7 @@ import { DateFotmatter } from "../utils/date";
 import { Link } from "react-router-dom";
 import { useDebounce } from "../hooks/useDebounce";
 import Pagination from "../components/Pagination";
+import AdvancedPagination from "../components/AdvancePagination";
 
 const Blogs = () => {
   const [search, setSearch] = useState("");
@@ -16,21 +17,22 @@ const Blogs = () => {
   const {
     blogs,
     loading,
-    err,
+    error,
     msg,
     setTitle,
     setSort,
-    limit,
-    page,
+    currentPage,
+    setCurrentPage,
     setLimit,
-    setPage,
+    limit,
+    total,
+    setTotal,
   } = useBlogContext();
   const handelErrorImg = (e) => {
     e.target.src = Logo;
   };
 
   // console.log("limit value bog:", limit);
-
 
   const { delayTerm } = useDebounce({ title: search });
 
@@ -112,9 +114,9 @@ const Blogs = () => {
           blogs?.data.length > 0 &&
           blogs.data.map((blog) => {
             return (
-              <div key={blog?.slug} className="col-md-6 col-sm-12">
+              <div key={blog?.slug} className="col-md-6 col-sm-12 pointer">
                 <div
-                  className="card mb-3 border-0"
+                  className="card mb-3 border-0 select"
                   style={{ maxWidth: "540px" }}
                 >
                   <div className="row g-0">
@@ -170,13 +172,22 @@ const Blogs = () => {
       </div>
 
       {/* pagination */}
-      <Pagination
+      {/* <Pagination
       data={blogs}
         limit={limit}
         page={page}
         setLimit={setLimit}
         setPage={setPage}
-      ></Pagination>
+      ></Pagination> */}
+
+      {/* Advance Pagination */}
+      <AdvancedPagination
+        limit={limit}
+        CurrentPage={currentPage}
+        setLimit={setLimit}
+        setCurrentPage={setCurrentPage}
+        total={total}
+      ></AdvancedPagination>
     </div>
   );
 };

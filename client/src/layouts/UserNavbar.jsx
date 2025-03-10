@@ -12,7 +12,7 @@ const UserNavbar = () => {
   };
 
   return (
-    <div>
+    <div className="container">
       <nav className="navbar border-bottom">
         <div className="container-fluid">
           <Link className="navbar-brand fw-bold" to="#">

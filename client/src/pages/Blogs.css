@@ -2,7 +2,7 @@
     width: 100%;
     object-fit: cover;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .blog-details{
@@ -40,6 +40,16 @@
 
 .card-text{
     text-align: justify;
+}
+
+.pointer{
+    cursor: pointer;
+}
+.select{
+    transition: 1s ease;
+}
+.select:hover{
+    box-shadow: 0 4px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width:767px) {
