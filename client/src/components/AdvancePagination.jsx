@@ -22,14 +22,14 @@ const AdvancedPagination = ({
       </Pagination.Item>
     );
   }
-//  console.log("advace current page:", currentPage);
+  //  console.log("advace current page:", currentPage);
   const paginationRange = usePagination({
     currentPage,
     totalCount: total,
     pageSize: limit,
     siblingCount: 1,
   });
-//  console.log("pagination range:", paginationRange);
+  //  console.log("pagination range:", paginationRange);
   if (currentPage === 0 || paginationRange.length < 2) {
     return null;
   }
@@ -42,7 +42,10 @@ const AdvancedPagination = ({
             <select
               className="page-item page-link rounded"
               value={limit}
-              onChange={(e) => setLimit(Number(e.target.value))}
+              onChange={(e) => {
+                setLimit(Number(e.target.value));
+                setCurrentPage(1);
+              }}
             >
               <option value={2}>2</option>
               <option value={4}>4</option>
@@ -53,8 +56,14 @@ const AdvancedPagination = ({
         </div>
         <div className="col-auto">
           <Pagination size="sm">
-            <Pagination.First onClick={() => setCurrentPage(1)} />
-            <Pagination.Prev onClick={() => setCurrentPage(currentPage - 1)} />
+            <Pagination.First
+              onClick={() => setCurrentPage(1)}
+              disabled={currentPage === 1}
+            />
+            <Pagination.Prev
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage(currentPage - 1)}
+            />
             {paginationRange.map((pageNumber, index) => {
               if (pageNumber === DOTS) {
                 return <Pagination.Ellipsis key={`${index} - ${pageNumber}`} />;
@@ -70,6 +79,7 @@ const AdvancedPagination = ({
               );
             })}
             <Pagination.Next
+              disabled={currentPage === totalNumberOfPages}
               onClick={() => {
                 currentPage < totalNumberOfPages
                   ? setCurrentPage(currentPage + 1)
@@ -78,6 +88,7 @@ const AdvancedPagination = ({
             />
             <Pagination.Last
               onClick={() => setCurrentPage(totalNumberOfPages)}
+              disabled={currentPage === totalNumberOfPages}
             />
           </Pagination>
         </div>
