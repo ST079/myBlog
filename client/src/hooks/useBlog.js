@@ -6,7 +6,7 @@ const useBlog = ({ title, sort }) => {
   const [error, setError] = useState("");
   const [msg, setMsg] = useState("");
   const [loading, setLoading] = useState(false);
-  const [limit, setLimit] = useState(20);
+  const [limit, setLimit] = useState(8);
   const [currentPage, setCurrentPage] = useState(1);
   const [total, setTotal] = useState(0);
 
@@ -39,7 +39,7 @@ const useBlog = ({ title, sort }) => {
     };
     fetchData();
   }, [title, limit, currentPage, sort]);
-
+//  console.log("useblog current page:", currentPage);
   return { data, error, loading, msg, limit, currentPage, total ,setCurrentPage,setLimit,setTotal};
 };
 

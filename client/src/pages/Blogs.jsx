@@ -28,12 +28,13 @@ const Blogs = () => {
     total,
     setTotal,
   } = useBlogContext();
+  //  console.log("blogs current page:", currentPage);
   const handelErrorImg = (e) => {
     e.target.src = Logo;
   };
 
   // console.log("limit value bog:", limit);
-
+  // console.log("blogs data:", blogs);
   const { delayTerm } = useDebounce({ title: search });
 
   useEffect(() => {
@@ -104,13 +105,14 @@ const Blogs = () => {
 
       {/* <!-- Blog Data --> */}
       <div className="row">
-        {loading && (
+        {}
+        {loading ? (
           <>
             <BlogLoader />
             <BlogLoader />
           </>
-        )}
-        {blogs &&
+        ) : (
+          blogs &&
           blogs?.data.length > 0 &&
           blogs.data.map((blog) => {
             return (
@@ -168,7 +170,8 @@ const Blogs = () => {
                 </div>
               </div>
             );
-          })}
+          })
+        )}
       </div>
 
       {/* pagination */}
@@ -183,7 +186,7 @@ const Blogs = () => {
       {/* Advance Pagination */}
       <AdvancedPagination
         limit={limit}
-        CurrentPage={currentPage}
+        currentPage={currentPage}
         setLimit={setLimit}
         setCurrentPage={setCurrentPage}
         total={total}

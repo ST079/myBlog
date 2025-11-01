@@ -21,7 +21,7 @@ export const BlogContextProvider = ({ children }) => {
     title,
     sort,
   });
-
+//  console.log("context current page:", currentPage);
   return (
     <BlogContext.Provider
       value={{
