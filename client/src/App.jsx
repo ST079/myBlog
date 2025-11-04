@@ -13,6 +13,7 @@ import Blogs from "./pages/Blogs";
 import BlogDetails from "./pages/BlogDetails";
 import BlogList from "./pages/admin/blogs/BlogList";
 import List from "./pages/admin/users/List";
+import {Bookmarks} from "./pages/Bookmarks";
 
 
 const App = () => {
@@ -31,6 +32,7 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/blogs/:id" element={<BlogDetails />} />
+          <Route path="/bookmarks" element={<Bookmarks/>} />
           <Route path="/contact" element={<Contact />} />
         </Route>
 

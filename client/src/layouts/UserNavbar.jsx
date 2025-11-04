@@ -31,12 +31,17 @@ const UserNavbar = () => {
               <button className="btn p-0" onClick={logout}>
                 <i className="fa-duotone fa-solid fa-arrow-right-from-bracket mx-3 fs-5"></i>
               </button>
-              <button className="btn p-0">
-                <i className="fa-duotone fa-solid fa-bookmark cursor-pointer fs-5"></i>
-              </button>
-              <button className="btn p-0">
+              <Link to={"/bookmarks"}>
+                <button className="btn p-0 position-relative">
+                  <i className="fa-duotone fa-solid fa-bookmark cursor-pointer fs-5"></i>
+                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    3
+                  </span>
+                </button>
+              </Link>
+              {/* <button className="btn p-0">
                 <i className="fa-duotone fa-solid fa-bell cursor-pointer mx-3 fs-5"></i>
-              </button>
+              </button> */}
             </div>
           </nav>
         </div>
@@ -73,67 +78,47 @@ const UserNavbar = () => {
           >
             <ul className="navbar-nav">
               <li className="nav-item">
-                <Link className={`nav-link ${pathname === "/" ? 'active fw-bold' : ''}`} aria-current="page" to="/">
+                <Link
+                  className={`nav-link ${
+                    pathname === "/" ? "active fw-bold" : ""
+                  }`}
+                  aria-current="page"
+                  to="/"
+                >
                   Home
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className={`nav-link ${pathname.includes('/about') ? 'active fw-bold' : ''}`} to="/about">
+                <Link
+                  className={`nav-link ${
+                    pathname.includes("/about") ? "active fw-bold" : ""
+                  }`}
+                  to="/about"
+                >
                   About
                 </Link>
               </li>
 
               <li className="nav-item">
-                <Link className={`nav-link ${pathname.includes('/blogs') ? 'active fw-bold' : ''}`} to="/blogs">
+                <Link
+                  className={`nav-link ${
+                    pathname.includes("/blogs") ? "active fw-bold" : ""
+                  }`}
+                  to="/blogs"
+                >
                   Blogs
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className={`nav-link ${pathname.includes('/contact') ? 'active fw-bold' : ''}`} to="/contact">
+                <Link
+                  className={`nav-link ${
+                    pathname.includes("/contact") ? "active fw-bold" : ""
+                  }`}
+                  to="/contact"
+                >
                   Contact
                 </Link>
               </li>
-              <li className="nav-item dropdown">
-                <Link
-                  className="nav-link dropdown-toggle"
-                  to="#"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Categories
-                </Link>
-                <ul className="dropdown-menu">
-                  <li>
-                    <Link className="dropdown-item" to="/blogs/food">
-                      Food
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/blogs/lifestyle">
-                      LifeStyle
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/blogs/technology">
-                      Technology
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/blogs/sports">
-                      Sports
-                    </Link>
-                  </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/writeforus">
-                      Write About Us
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-            
             </ul>
           </div>
         </div>

@@ -1,15 +1,9 @@
-import React, { useEffect } from "react";
 import Logo from "../assets/logo.png";
-import { use } from "react";
 
 export const BlogLoader = () => {
   const handelErrorImg = (e) => {
     e.target.src = Logo;
   };
-
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, []);
 
   return (
     <div className="row">

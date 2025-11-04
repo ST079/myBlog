@@ -6,7 +6,7 @@ import { BlogLoader } from "../components/Loader";
 import { DateFotmatter } from "../utils/date";
 import { Link } from "react-router-dom";
 import { useDebounce } from "../hooks/useDebounce";
-import Pagination from "../components/Pagination";
+// import Pagination from "../components/Pagination";
 import AdvancedPagination from "../components/AdvancePagination";
 
 const Blogs = () => {
@@ -17,8 +17,6 @@ const Blogs = () => {
   const {
     blogs,
     loading,
-    error,
-    msg,
     setTitle,
     setSort,
     currentPage,
@@ -26,7 +24,6 @@ const Blogs = () => {
     setLimit,
     limit,
     total,
-    setTotal,
   } = useBlogContext();
   //  console.log("blogs current page:", currentPage);
   const handelErrorImg = (e) => {
